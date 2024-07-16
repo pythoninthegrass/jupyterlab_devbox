@@ -27,6 +27,7 @@ else
     echo "modular already installed"
 fi
 
+# TODO: refactor for using devbox instead of system python
 # activate .venv
 if [[ ! -d "${TLD}/.venv" ]]; then
     echo "Creating virtual environment..."
