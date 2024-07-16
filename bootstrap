@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+# shellcheck disable=SC1091
+
+GIT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null)"
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+
+# get the root directory
+if [[ -n "$GIT_ROOT" ]]; then
+	TLD="$(git rev-parse --show-toplevel)"
+else
+	TLD="${SCRIPT_DIR}"
+fi
+
+# install devbox
+if ! [[ "$(command -v devbox 2>/dev/null)" ]]; then
+    curl -fsSL https://get.jetify.com/devbox | bash
+else
+    echo "devbox already installed"
+fi
+
+# install modular
+if ! [[ "$(command -v modular 2>/dev/null)" ]]; then
+    echo "Installing modular..."
+    curl -s https://get.modular.com | sh -
+else
+    echo "modular already installed"
+fi
+
+# activate .venv
+if [[ ! -d "${TLD}/.venv" ]]; then
+    echo "Creating virtual environment..."
+    python3 -m venv "${TLD}/.venv"
+fi
+
+# activate the virtual environment
+source "${TLD}/.venv/bin/activate"
+
+# install mojo
+if ! [[ "$(command -v mojo 2>/dev/null)" ]]; then
+    echo "Installing mojo..."
+    modular install mojo
+else
+    echo "mojo already installed"
+fi
+
+# deactivate the virtual environment
+deactivate
