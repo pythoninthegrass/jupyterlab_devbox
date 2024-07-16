@@ -24,7 +24,7 @@ Install Python 3.12+ then run the bootstrap script to install the `devbox`, `mod
 ./bootstrap
 ```
 
-After the bootstrap script completes, you can start the `devbox` and run `jupyterlab`.
+After the bootstrap script completes, you can start the `devbox` and run `jupyter lab`.
 
 The default token is `devbox`. You can change the token by setting the `JUPYTER_TOKEN` environment variable.
 
@@ -50,4 +50,4 @@ exit
 
 ## TODO
 
-* Figure out `stdin` w/`jupyterlab`
+* Figure out `stdin` w/`jupyter lab`
